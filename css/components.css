@@ -331,10 +331,18 @@
 
 .featured-review__image {
   width: 100%;
+  aspect-ratio: 16 / 9; /* Tentukan rasio kotak (bisa disesuaikan: 4/3, 16/9, dll) */
   background: linear-gradient(135deg, #e8e8e8 0%, #d4d4d4 50%, #c0c0c0 100%);
   border: var(--border-thin);
   overflow: hidden;
   position: relative;
+}
+
+.featured-review__image img {
+  width: 100%;
+  height: 100%; /* Ubah height dari auto ke 100% */
+  object-fit: cover; /* Ubah dari contain ke cover agar mengisi penuh */
+  display: block;
 }
 
 .featured-review__image::after {
@@ -343,6 +351,7 @@
   inset: 0;
   background:
     linear-gradient(135deg, transparent 40%, rgba(37, 99, 235, 0.08) 100%);
+  pointer-events: none;
 }
 
 .featured-review__category {
