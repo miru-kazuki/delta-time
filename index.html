@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeltaTime — Game Engine Performance Dashboard</title>
+  <meta name="description" content="DeltaTime is a minimalist editorial dashboard comparing Godot Engine and Unity performance benchmarks, memory usage, loading times, and build sizes.">
+
+  <!-- icon -->
+   <link rel="icon" type="image/svg+xml" href="assets/deltaTimeLogo.svg">
+   
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="40" height="40">
+      </a>
+
+      <div class="flex items-center gap-lg">
+        <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+        <a href="#featured-review" class="header__link">Latest Review</a>
+        <a href="#benchmark" class="header__link">Benchmarks</a>
+        <a href="#tech-stack" class="header__link">Tech Stack</a>
+      </nav>
+        <button class="header__search" id="search-toggle" aria-label="Open search" type="button">
+          <img src="assets/searchIcon.svg" alt="" aria-hidden="true" width="18" height="18">
+        </button>
+        <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="search-modal" role="dialog" aria-label="Search" aria-hidden="true">
+    <div class="search-modal__inner">
+      <label for="search-input" class="visually-hidden">Search articles</label>
+      <input type="search" id="search-input" class="search-modal__input" placeholder="Search articles, benchmarks, reviews…" autocomplete="off">
+      <p class="search-modal__hint">Press <kbd>Esc</kbd> to close</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <!-- Hero Top Section (Content + Visual Image Side-by-Side) -->
+        <div class="hero__top">
+          <!-- Left side hero content -->
+          <div class="hero__content">
+            <p class="eyebrow hero__eyebrow">Game Engine / Performance</p>
+            <h1 class="heading-display hero__title" id="hero-title">Measure the engine.<br>Understand the game.</h1>
+            <p class="body-large hero__description">Independent performance analysis of Godot Engine and Unity — frame rates, memory, load times, and build sizes compared side by side.</p>
+            <a href="#benchmark" class="cta">Explore Benchmarks <span aria-hidden="true">→</span></a>
+          </div>
+
+          <!-- Right side hero image visual -->
+          <figure class="hero__visual" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.05">
+            <img src="assets/godotvsunity.svg" alt="Godot vs Unity" class="hero__visual-img" width="540" height="360">
+          </figure>
+        </div>
+
+        <!-- Hero Bottom Cards -->
+        <div class="hero__cards">
+          <!-- Godot Card -->
+          <div class="engine-card" id="hero-godot-card" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
+            <div class="engine-card__header">
+              <span class="engine-card__name">Godot Engine</span>
+              <span class="engine-card__badge">v4.3</span>
+            </div>
+            <div class="engine-card__metric">
+              <p class="engine-card__metric-label">Average FPS</p>
+              <p class="engine-card__metric-value">142<span class="engine-card__metric-unit">fps</span></p>
+            </div>
+            <div class="engine-card__metric">
+              <p class="engine-card__metric-label">Memory Usage</p>
+              <p class="engine-card__metric-value">820<span class="engine-card__metric-unit">MB</span></p>
+            </div>
+            <div class="engine-card__metric">
+              <p class="engine-card__metric-label">Build Size</p>
+              <p class="engine-card__metric-value">42<span class="engine-card__metric-unit">MB</span></p>
+            </div>
+          </div>
+
+          <!-- Unity Card -->
+          <div class="engine-card" id="hero-unity-card" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.08">
+            <div class="engine-card__header">
+              <span class="engine-card__name">Unity</span>
+              <span class="engine-card__badge">2024.1</span>
+            </div>
+            <div class="engine-card__metric">
+              <p class="engine-card__metric-label">Average FPS</p>
+              <p class="engine-card__metric-value">128<span class="engine-card__metric-unit">fps</span></p>
+            </div>
+            <div class="engine-card__metric">
+              <p class="engine-card__metric-label">Memory Usage</p>
+              <p class="engine-card__metric-value">960<span class="engine-card__metric-unit">MB</span></p>
+            </div>
+            <div class="engine-card__metric">
+              <p class="engine-card__metric-label">Build Size</p>
+              <p class="engine-card__metric-value">86<span class="engine-card__metric-unit">MB</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FEATURED REVIEW ========== -->
+    <section class="featured-review" id="featured-review" aria-labelledby="featured-review-title">
+      <div class="container">
+        <article class="featured-review__inner" data-aos="fade-up">
+          <figure class="featured-review__image" id="featured-review-visual" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06">
+            <img src="assets/tamnel.jpg" alt="">
+            <figcaption class="visually-hidden">Game engine editor showing a 3D scene with performance metrics overlay</figcaption>
+          </figure>
+          <div class="featured-review__body">
+            <p class="eyebrow featured-review__category">Performance Analysis</p>
+            <h2 class="featured-review__title" id="featured-review-title">Godot 4.3 vs Unity 2024: Rendering Pipeline Deep Dive</h2>
+            <p class="featured-review__desc">A comprehensive comparison of rendering architectures, shader compilation strategies, and real-world frame rate performance across identical test scenes.</p>
+            <div class="featured-review__meta">
+              <time datetime="2026-09-15">Sep 15, 2026</time>
+              <span class="featured-review__meta-divider" aria-hidden="true"></span>
+              <span>12 min read</span>
+            </div>
+            <a href="article.html" class="cta">Read Full Analysis <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========== LATEST REVIEWS ========== -->
+    <section class="reviews-section" id="latest-reviews" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="reviews-section__header">
+          <h2 class="heading-section" id="reviews-title">Latest Reviews</h2>
+          <a href="reviews.html" class="cta">View All <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="grid-3">
+          <!-- Review 1 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="0">
+            <figure class="review-card__image">
+              <div class="review-card__image-inner" role="img" aria-label="Physics engine stress test visualization">
+                <img src="assets/physx.jpg" alt="">
+              </div>
+            </figure>
+            <div class="review-card__body">
+              <p class="eyebrow review-card__category">Benchmark</p>
+              <h3 class="review-card__title">Physics Engine Stress Test: 10,000 Rigid Bodies</h3>
+              <p class="review-card__desc">How Godot's Jolt integration and Unity's PhysX handle extreme physics workloads with frame time analysis.</p>
+              <div class="review-card__meta">
+                <time datetime="2026-09-10">Sep 10, 2026</time>
+                <span class="review-card__meta-divider" aria-hidden="true"></span>
+                <span>8 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 2 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="100">
+            <figure class="review-card__image">
+              <div class="review-card__image-inner" style="background: linear-gradient(135deg, #dde4ee 0%, #c8d0dc 100%);" role="img" aria-label="Memory profiling session screenshot">
+                <img src="assets/godotvscsharp.jpg" alt="">
+              </div>
+            </figure>
+            <div class="review-card__body">
+              <p class="eyebrow review-card__category">Analysis</p>
+              <h3 class="review-card__title">Memory Profiling: GDScript vs C# Allocations</h3>
+              <p class="review-card__desc">Tracking garbage collection patterns and heap allocation efficiency across both scripting environments.</p>
+              <div class="review-card__meta">
+                <time datetime="2026-09-05">Sep 5, 2026</time>
+                <span class="review-card__meta-divider" aria-hidden="true"></span>
+                <span>10 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 3 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="200">
+            <figure class="review-card__image">
+              <div class="review-card__image-inner" style="background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);" role="img" aria-label="Build pipeline comparison chart">
+                <img src="assets/bewan.jpg" alt="">
+              </div>
+            </figure>
+            <div class="review-card__body">
+              <p class="eyebrow review-card__category">Tooling</p>
+              <h3 class="review-card__title">Build Pipeline: Export Times and Output Optimization</h3>
+              <p class="review-card__desc">Comparing build times, output binary sizes, and optimization options for desktop and mobile targets.</p>
+              <div class="review-card__meta">
+                <time datetime="2026-08-28">Aug 28, 2026</time>
+                <span class="review-card__meta-divider" aria-hidden="true"></span>
+                <span>7 min read</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BENCHMARK SPOTLIGHT ========== -->
+    <section class="benchmark" id="benchmark" aria-labelledby="benchmark-title" data-aos="fade-up">
+      <div class="container">
+        <div class="benchmark__header">
+          <h2 class="benchmark__title" id="benchmark-title">Benchmark Spotlight</h2>
+          <p class="benchmark__desc body-large">Average FPS comparison across identical test scenes. Higher is better.</p>
+        </div>
+
+        <div class="benchmark__bars" id="benchmark-bars">
+          <!-- Godot FPS -->
+          <div class="benchmark-bar benchmark-bar--godot">
+            <div class="benchmark-bar__label">
+              <span class="benchmark-bar__engine">Godot Engine</span>
+              <span class="benchmark-bar__value" id="godot-fps-value">0<span>fps</span></span>
+            </div>
+            <progress id="godot-fps-bar" max="160" value="0" aria-label="Godot average FPS: 142">142</progress>
+          </div>
+
+          <!-- Unity FPS -->
+          <div class="benchmark-bar benchmark-bar--unity">
+            <div class="benchmark-bar__label">
+              <span class="benchmark-bar__engine">Unity</span>
+              <span class="benchmark-bar__value" id="unity-fps-value">0<span>fps</span></span>
+            </div>
+            <progress id="unity-fps-bar" max="160" value="0" aria-label="Unity average FPS: 128">128</progress>
+          </div>
+        </div>
+
+        <div class="benchmark__env">
+          <p class="benchmark__env-title">Test Environment</p>
+          <div class="benchmark__env-list">
+            <p class="benchmark__env-item"><strong>CPU:</strong> AMD Ryzen 7 7800X3D</p>
+            <p class="benchmark__env-item"><strong>GPU:</strong> NVIDIA RTX 4070</p>
+            <p class="benchmark__env-item"><strong>RAM:</strong> 32 GB DDR5-6000</p>
+            <p class="benchmark__env-item"><strong>OS:</strong> Windows 11 23H2</p>
+            <p class="benchmark__env-item"><strong>Scene:</strong> 3D Sponza, 100k tris</p>
+            <p class="benchmark__env-item"><strong>Resolution:</strong> 1920×1080</p>
+          </div>
+        </div>
+
+        <a href="benchmarks.html" class="btn btn--light">View Full Benchmarks <span aria-hidden="true">→</span></a>
+
+        <p class="benchmark__disclaimer">* Example data for demonstration purposes. These numbers are not from a verified, peer-reviewed benchmark methodology.</p>
+      </div>
+    </section>
+
+    <!-- ========== ENGINE COMPARISON ========== -->
+    <section class="comparison" id="comparison" aria-labelledby="comparison-title" data-aos="fade-up">
+      <div class="container">
+        <div class="comparison__header">
+          <h2 class="comparison__title" id="comparison-title">Engine Comparison</h2>
+          <div class="comparison__tabs" role="tablist" aria-label="Select engine to compare">
+            <button class="comparison__tab is-active" role="tab" aria-selected="true" aria-controls="comparison-panel" id="tab-godot" data-engine="godot" type="button">Godot</button>
+            <button class="comparison__tab" role="tab" aria-selected="false" aria-controls="comparison-panel" id="tab-unity" data-engine="unity" type="button">Unity</button>
+          </div>
+        </div>
+
+        <div class="comparison__grid" id="comparison-panel" role="tabpanel" aria-labelledby="tab-godot" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.04">
+          <div class="comparison__card">
+            <p class="comparison__card-label">Performance</p>
+            <p class="comparison__card-value" id="comp-fps">142</p>
+            <p class="comparison__card-unit">avg fps</p>
+            <p class="comparison__card-diff is-positive" id="comp-fps-diff">+10.9% vs Unity</p>
+          </div>
+          <div class="comparison__card">
+            <p class="comparison__card-label">Memory</p>
+            <p class="comparison__card-value" id="comp-mem">820</p>
+            <p class="comparison__card-unit">MB RAM</p>
+            <p class="comparison__card-diff is-positive" id="comp-mem-diff">−14.6% vs Unity</p>
+          </div>
+          <div class="comparison__card">
+            <p class="comparison__card-label">Loading Time</p>
+            <p class="comparison__card-value" id="comp-load">4.2</p>
+            <p class="comparison__card-unit">seconds</p>
+            <p class="comparison__card-diff is-positive" id="comp-load-diff">−17.6% vs Unity</p>
+          </div>
+          <div class="comparison__card">
+            <p class="comparison__card-label">Build Size</p>
+            <p class="comparison__card-value" id="comp-build">42</p>
+            <p class="comparison__card-unit">MB</p>
+            <p class="comparison__card-diff is-positive" id="comp-build-diff">−51.2% vs Unity</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TECHNICAL DEEP DIVE ========== -->
+    <section class="deep-dive" id="deep-dive" aria-labelledby="deep-dive-title">
+      <div class="container">
+        <div class="deep-dive__inner">
+          <h2 class="deep-dive__title" id="deep-dive-title">Technical Deep Dive</h2>
+          <div class="deep-dive__content">
+            <p>The performance gap between Godot 4.3 and Unity 2024 in our test scenarios stems from fundamental architectural differences in how each engine handles rendering, memory management, and asset loading.</p>
+
+            <h3>Rendering Architecture</h3>
+            <p>Godot 4's Vulkan-based renderer introduces a forward+ rendering pipeline that minimizes draw calls through a clustered lighting approach. Unity's Universal Render Pipeline (URP) takes a different approach with scriptable render passes, offering more flexibility at the cost of additional CPU overhead for pass management.</p>
+
+            <h3>Memory Management</h3>
+            <p>GDScript uses reference counting with cycle detection, avoiding the stop-the-world pauses associated with Unity's C# garbage collector. While C# offers better raw execution speed, the GC pauses can introduce frame time spikes during complex scene transitions — a pattern clearly visible in our profiling data.</p>
+
+            <h3>Asset Loading</h3>
+            <p>Godot's resource loading system uses a threaded approach with dependency tracking that allows progressive scene loading. Unity's Addressables system provides similar functionality but introduces additional abstraction layers that add overhead to initial load times.</p>
+
+            <p>It's important to note that both engines are highly capable, and real-world performance depends heavily on project architecture, optimization efforts, and the specific features used. These benchmarks represent one controlled scenario and should not be used as the sole basis for engine selection.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CODE COMPARISON ========== -->
+    <section class="code-comparison" id="code-comparison" aria-labelledby="code-comparison-title">
+      <div class="container">
+        <h2 class="code-comparison__title" id="code-comparison-title">Code Comparison</h2>
+        <p class="code-comparison__desc">A simple player movement script in each engine's primary scripting language.</p>
+
+        <div class="code-comparison__grid">
+          <!-- GDScript -->
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">GDScript</span>
+              <span class="code-block__engine">Godot Engine</span>
+            </div>
+            <pre><code><span class="code-keyword">extends</span> CharacterBody3D
+
+<span class="code-keyword">const</span> SPEED <span class="code-keyword">=</span> <span class="code-number">5.0</span>
+<span class="code-keyword">const</span> JUMP_VELOCITY <span class="code-keyword">=</span> <span class="code-number">4.5</span>
+
+<span class="code-keyword">func</span> <span class="code-function">_physics_process</span>(delta: <span class="code-type">float</span>) -> <span class="code-type">void</span>:
+    <span class="code-comment"># Add gravity</span>
+    <span class="code-keyword">if not</span> is_on_floor():
+        velocity.y <span class="code-keyword">-=</span> gravity <span class="code-keyword">*</span> delta
+
+    <span class="code-comment"># Handle jump</span>
+    <span class="code-keyword">if</span> Input.is_action_just_pressed(<span class="code-string">"jump"</span>) <span class="code-keyword">and</span> is_on_floor():
+        velocity.y <span class="code-keyword">=</span> JUMP_VELOCITY
+
+    <span class="code-comment"># Movement</span>
+    <span class="code-keyword">var</span> input_dir <span class="code-keyword">=</span> Input.get_vector(
+        <span class="code-string">"move_left"</span>, <span class="code-string">"move_right"</span>,
+        <span class="code-string">"move_forward"</span>, <span class="code-string">"move_back"</span>)
+    <span class="code-keyword">var</span> direction <span class="code-keyword">=</span> (transform.basis <span class="code-keyword">*</span>
+        Vector3(input_dir.x, <span class="code-number">0</span>, input_dir.y)).normalized()
+
+    velocity.x <span class="code-keyword">=</span> direction.x <span class="code-keyword">*</span> SPEED
+    velocity.z <span class="code-keyword">=</span> direction.z <span class="code-keyword">*</span> SPEED
+    move_and_slide()</code></pre>
+          </div>
+
+          <!-- C# -->
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">C#</span>
+              <span class="code-block__engine">Unity</span>
+            </div>
+            <pre><code><span class="code-keyword">using</span> UnityEngine;
+
+<span class="code-keyword">public class</span> <span class="code-type">PlayerController</span> : <span class="code-type">MonoBehaviour</span>
+{
+    [<span class="code-type">SerializeField</span>] <span class="code-keyword">private float</span> speed <span class="code-keyword">=</span> <span class="code-number">5f</span>;
+    [<span class="code-type">SerializeField</span>] <span class="code-keyword">private float</span> jumpForce <span class="code-keyword">=</span> <span class="code-number">4.5f</span>;
+
+    <span class="code-keyword">private</span> <span class="code-type">CharacterController</span> _controller;
+    <span class="code-keyword">private</span> <span class="code-type">Vector3</span> _velocity;
+
+    <span class="code-keyword">void</span> <span class="code-function">Start</span>()
+    {
+        _controller <span class="code-keyword">=</span> GetComponent&lt;<span class="code-type">CharacterController</span>&gt;();
+    }
+
+    <span class="code-keyword">void</span> <span class="code-function">Update</span>()
+    {
+        <span class="code-comment">// Gravity</span>
+        <span class="code-keyword">if</span> (!_controller.isGrounded)
+            _velocity.y <span class="code-keyword">+=</span> Physics.gravity.y <span class="code-keyword">*</span> Time.deltaTime;
+        <span class="code-keyword">else</span>
+            _velocity.y <span class="code-keyword">=</span> <span class="code-number">-0.5f</span>;
+
+        <span class="code-comment">// Jump</span>
+        <span class="code-keyword">if</span> (Input.GetButtonDown(<span class="code-string">"Jump"</span>) <span class="code-keyword">&amp;&amp;</span> _controller.isGrounded)
+            _velocity.y <span class="code-keyword">=</span> jumpForce;
+
+        <span class="code-comment">// Movement</span>
+        <span class="code-keyword">float</span> x <span class="code-keyword">=</span> Input.GetAxis(<span class="code-string">"Horizontal"</span>);
+        <span class="code-keyword">float</span> z <span class="code-keyword">=</span> Input.GetAxis(<span class="code-string">"Vertical"</span>);
+        <span class="code-type">Vector3</span> move <span class="code-keyword">=</span> transform.right <span class="code-keyword">*</span> x <span class="code-keyword">+</span> transform.forward <span class="code-keyword">*</span> z;
+
+        _controller.Move((move <span class="code-keyword">*</span> speed <span class="code-keyword">+</span> _velocity) <span class="code-keyword">*</span> Time.deltaTime);
+    }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ARTICLE IMAGES ========== -->
+    <section class="article-images" id="article-images" aria-labelledby="article-images-title">
+      <div class="container">
+        <h2 class="article-images__title" id="article-images-title">From the Benchmark Lab</h2>
+
+        <div class="article-images__grid">
+          <figure class="article-image" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06">
+            <img src="assets/benchmark-frametime.svg" alt="Frame time graph comparing Godot and Unity" class="article-image__img" width="600" height="450" loading="lazy">
+            <figcaption class="article-image__caption">Frame time analysis — 99th percentile comparison</figcaption>
+          </figure>
+
+          <figure class="article-image" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06">
+            <img src="assets/benchmark-memory.svg" alt="Memory allocation timeline during scene transitions" class="article-image__img" width="600" height="450" loading="lazy">
+            <figcaption class="article-image__caption">Memory allocation timeline during scene transitions</figcaption>
+          </figure>
+
+          <figure class="article-image" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06">
+            <img src="assets/benchmark-gpu.svg" alt="GPU utilization heatmap across rendering passes" class="article-image__img" width="600" height="450" loading="lazy">
+            <figcaption class="article-image__caption">GPU utilization heatmap across rendering passes</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TECH STACK ========== -->
+    <section class="tech-stack" id="tech-stack" aria-labelledby="tech-stack-title" data-aos="fade-up">
+      <div class="container">
+        <div class="tech-stack__header">
+          <h2 class="tech-stack__title" id="tech-stack-title">Built With</h2>
+          <p class="tech-stack__desc">The technologies powering this editorial dashboard.</p>
+        </div>
+
+        <div class="tech-stack__grid">
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="0">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 6L7.5 26L16 28.5L24.5 26L27 6H5Z" stroke="#E34F26" stroke-width="1.5" fill="none"/>
+                <path d="M16 8V26.5" stroke="#E34F26" stroke-width="1"/>
+                <path d="M10 10H22L21.5 16H11.5L12 20H21L20.5 24L16 25.5L11.5 24L11.2 21" stroke="#E34F26" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">HTML5</p>
+            <p class="tech-stack__role">Structure</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="50">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 6L7.5 26L16 28.5L24.5 26L27 6H5Z" stroke="#1572B6" stroke-width="1.5" fill="none"/>
+                <path d="M16 8V26.5" stroke="#1572B6" stroke-width="1"/>
+                <path d="M10 10H22L21.5 14H12L12.5 18H21L20.5 24L16 25.5L11.5 24L11.2 21" stroke="#1572B6" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">CSS3</p>
+            <p class="tech-stack__role">Styling</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="100">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="6" width="20" height="20" rx="2" stroke="#F7DF1E" stroke-width="1.5" fill="none"/>
+                <text x="16" y="22" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#1a1a1a">JS</text>
+              </svg>
+            </div>
+            <p class="tech-stack__name">JavaScript</p>
+            <p class="tech-stack__role">Logic</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="150">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="10" stroke="#68A063" stroke-width="1.5" fill="none"/>
+                <path d="M12 20L16 12L20 20" stroke="#68A063" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">AOS</p>
+            <p class="tech-stack__role">Scroll Animations</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="200">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="8" width="20" height="16" rx="1" stroke="#6366F1" stroke-width="1.5" fill="none" transform="rotate(-3 16 16)"/>
+                <rect x="8" y="10" width="16" height="12" rx="1" stroke="#6366F1" stroke-width="1" fill="none" transform="rotate(2 16 16)"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">Tilt.js</p>
+            <p class="tech-stack__role">Hover Effects</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Gallery Modal -->
+  <dialog class="image-dialog gallery-modal" id="gallery-modal" aria-label="Image Preview">
+    <button class="dialog-close gallery-modal__close" id="gallery-close" type="button" aria-label="Close image">×</button>
+    <figure class="gallery-modal__figure">
+      <img class="gallery-modal__img" id="gallery-img" src="" alt="">
+      <figcaption class="gallery-modal__caption" id="gallery-caption"></figcaption>
+    </figure>
+  </dialog>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <a href="index.html" class="footer__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="28" height="28">
+      </a>
+      <p class="footer__copy">&copy; 2026 DeltaTime. Independent engine analysis.</p>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="reviews.html" class="footer__link">Reviews</a>
+        <a href="benchmarks.html" class="footer__link">Benchmarks</a>
+        <a href="tech-stack.html" class="footer__link">Tech Stack</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/benchmark.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

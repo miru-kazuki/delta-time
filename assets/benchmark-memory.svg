@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="godot-mem-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#478cbf" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#478cbf" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="unity-mem-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#777777" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#777777" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="#121212"/>
+  <rect x="60" y="70" width="680" height="440" fill="#181818" rx="4" stroke="#282828" stroke-width="1"/>
+
+  <!-- Title & Subtitle -->
+  <text x="60" y="42" fill="#f0f0f0" font-family="'Inter', -apple-system, sans-serif" font-size="16" font-weight="600" letter-spacing="0.5">MEMORY ALLOCATION PROFILE (TRANSITION &amp; STEADY STATE)</text>
+  <text x="740" y="42" fill="#888888" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="end">RAM Usage in MB</text>
+
+  <!-- Y-axis lines & labels -->
+  <!-- 1200 MB -->
+  <line x1="60" y1="120" x2="740" y2="120" stroke="#262626" stroke-width="1"/>
+  <text x="50" y="124" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="end">1200 MB</text>
+
+  <!-- 1000 MB -->
+  <line x1="60" y1="200" x2="740" y2="200" stroke="#2a2a2a" stroke-dasharray="4,4" stroke-width="1"/>
+  <text x="50" y="204" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="end">1000 MB</text>
+
+  <!-- 800 MB -->
+  <line x1="60" y1="280" x2="740" y2="280" stroke="#2a2a2a" stroke-dasharray="4,4" stroke-width="1"/>
+  <text x="50" y="284" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="end">800 MB</text>
+
+  <!-- 600 MB -->
+  <line x1="60" y1="360" x2="740" y2="360" stroke="#262626" stroke-width="1"/>
+  <text x="50" y="364" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="end">600 MB</text>
+
+  <!-- 400 MB -->
+  <line x1="60" y1="440" x2="740" y2="440" stroke="#262626" stroke-width="1"/>
+  <text x="50" y="444" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="end">400 MB</text>
+
+  <!-- Base Line -->
+  <line x1="60" y1="510" x2="740" y2="510" stroke="#383838" stroke-width="1.5"/>
+
+  <!-- Unity 2024 (Baseline 960 MB -> y = 216) -->
+  <!-- Scene transition spike around x=200..320 to 1120MB (y=152) -->
+  <path d="M 60,230 L 180,230 Q 210,230 220,160 L 260,152 Q 280,152 300,216 L 740,216 L 740,510 L 60,510 Z" 
+        fill="url(#unity-mem-grad)"/>
+  <path d="M 60,230 L 180,230 Q 210,230 220,160 L 260,152 Q 280,152 300,216 L 740,216" 
+        fill="none" stroke="#999999" stroke-width="2.5"/>
+
+  <!-- Godot 4.3 (Baseline 820 MB -> y = 272) -->
+  <!-- Progressive scene loading spike around x=200..280 to 910MB (y=236) -->
+  <path d="M 60,285 L 180,285 Q 210,285 225,236 L 250,236 Q 270,236 290,272 L 740,272 L 740,510 L 60,510 Z" 
+        fill="url(#godot-mem-grad)"/>
+  <path d="M 60,285 L 180,285 Q 210,285 225,236 L 250,236 Q 270,236 290,272 L 740,272" 
+        fill="none" stroke="#478cbf" stroke-width="2.5"/>
+
+  <!-- Scene reload marker line -->
+  <line x1="200" y1="70" x2="200" y2="510" stroke="#444444" stroke-dasharray="3,3" stroke-width="1"/>
+  <text x="205" y="90" fill="#aaaaaa" font-family="'JetBrains Mono', monospace" font-size="10">Scene Transition Trigger</text>
+
+  <!-- X-axis labels -->
+  <text x="60" y="535" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11">0s</text>
+  <text x="200" y="535" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11">Transition</text>
+  <text x="400" y="535" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11">Warm State</text>
+  <text x="600" y="535" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11">Steady State</text>
+  <text x="740" y="535" fill="#666666" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="end">60s</text>
+
+  <!-- Legend -->
+  <g transform="translate(60, 560)">
+    <rect x="0" y="4" width="20" height="4" fill="#478cbf" rx="2"/>
+    <text x="28" y="11" fill="#e0e0e0" font-family="'Inter', sans-serif" font-size="12" font-weight="500">Godot 4.3 Memory</text>
+    <text x="170" y="11" fill="#478cbf" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">820 MB Steady (−14.6%)</text>
+
+    <rect x="360" y="4" width="20" height="4" fill="#888888" rx="2"/>
+    <text x="388" y="11" fill="#e0e0e0" font-family="'Inter', sans-serif" font-size="12" font-weight="500">Unity 2024 Memory</text>
+    <text x="510" y="11" fill="#aaaaaa" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600">960 MB Steady</text>
+  </g>
+</svg>

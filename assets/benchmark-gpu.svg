@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#121212"/>
+  <rect x="60" y="70" width="680" height="440" fill="#181818" rx="4" stroke="#282828" stroke-width="1"/>
+
+  <!-- Title & Subtitle -->
+  <text x="60" y="42" fill="#f0f0f0" font-family="'Inter', -apple-system, sans-serif" font-size="16" font-weight="600" letter-spacing="0.5">GPU PASS UTILIZATION HEATMAP &amp; TIME BREAKDOWN</text>
+  <text x="740" y="42" fill="#888888" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="end">RTX 4070 (1080p Ultra)</text>
+
+  <!-- Godot Header Section -->
+  <text x="80" y="110" fill="#478cbf" font-family="'Inter', sans-serif" font-size="14" font-weight="600">Godot 4.3 — Forward+ (Total: 7.04ms)</text>
+  
+  <!-- Godot Stacked Bar Container -->
+  <g transform="translate(80, 125)">
+    <!-- Total width 640px -->
+    <!-- Depth Pre-pass: 1.12ms (16%) -> 102px -->
+    <rect x="0" y="0" width="102" height="42" fill="#2d587b" rx="2"/>
+    <text x="51" y="25" fill="#e0f0ff" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="middle">Depth (1.1ms)</text>
+
+    <!-- Cluster Light Assignment: 0.65ms (9%) -> 58px -->
+    <rect x="105" y="0" width="58" height="42" fill="#3a6f99" rx="2"/>
+    <text x="134" y="25" fill="#e0f0ff" font-family="'JetBrains Mono', monospace" font-size="10" text-anchor="middle">Clust (0.7ms)</text>
+
+    <!-- Opaque & 50 Dynamic Lights: 3.52ms (50%) -> 320px -->
+    <rect x="166" y="0" width="320" height="42" fill="#478cbf" rx="2"/>
+    <text x="326" y="25" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" text-anchor="middle">Opaque + Clustered Lights (3.5ms)</text>
+
+    <!-- Post-Processing (Bloom/SSAO): 1.75ms (25%) -> 154px -->
+    <rect x="489" y="0" width="151" height="42" fill="#29465f" rx="2"/>
+    <text x="564" y="25" fill="#c0dcff" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="middle">Post / SSAO (1.7ms)</text>
+  </g>
+
+  <!-- Unity Header Section -->
+  <text x="80" y="220" fill="#aaaaaa" font-family="'Inter', sans-serif" font-size="14" font-weight="600">Unity 2024 — URP Forward (Total: 7.81ms)</text>
+
+  <!-- Unity Stacked Bar Container -->
+  <g transform="translate(80, 235)">
+    <!-- Depth & Normal Pre-pass: 1.45ms -> 118px -->
+    <rect x="0" y="0" width="118" height="42" fill="#444444" rx="2"/>
+    <text x="59" y="25" fill="#e0e0e0" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="middle">Depth (1.5ms)</text>
+
+    <!-- Main Light + Opaque: 2.80ms -> 229px -->
+    <rect x="121" y="0" width="229" height="42" fill="#666666" rx="2"/>
+    <text x="235" y="25" fill="#ffffff" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" text-anchor="middle">Main Light (2.8ms)</text>
+
+    <!-- Additional Lights Pass (Overhead): 1.62ms -> 132px -->
+    <rect x="353" y="0" width="132" height="42" fill="#555555" rx="2"/>
+    <text x="419" y="25" fill="#f0f0f0" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="middle">Add Lights (1.6ms)</text>
+
+    <!-- Post Processing: 1.94ms -> 155px -->
+    <rect x="488" y="0" width="152" height="42" fill="#3a3a3a" rx="2"/>
+    <text x="564" y="25" fill="#cccccc" font-family="'JetBrains Mono', monospace" font-size="11" text-anchor="middle">Post / SSAO (1.9ms)</text>
+  </g>
+
+  <!-- Key Insight Box -->
+  <rect x="80" y="320" width="640" height="150" fill="#141c24" rx="4" stroke="#243444" stroke-width="1"/>
+  <text x="105" y="355" fill="#ffffff" font-family="'Inter', sans-serif" font-size="13" font-weight="600">ARCHITECTURAL TAKEAWAY:</text>
+  <text x="105" y="385" fill="#9ec5e8" font-family="'Inter', sans-serif" font-size="12">
+    • Godot's Forward+ pipeline computes light clustering once per frame on compute shader,
+  </text>
+  <text x="105" y="407" fill="#9ec5e8" font-family="'Inter', sans-serif" font-size="12">
+    &#160;&#160;allowing 50 dynamic point lights to shade in a single unified pass with minimal overhead.
+  </text>
+  <text x="105" y="437" fill="#cccccc" font-family="'Inter', sans-serif" font-size="12">
+    • Unity URP evaluates per-object dynamic lights with additional render passes,
+  </text>
+  <text x="105" y="459" fill="#cccccc" font-family="'Inter', sans-serif" font-size="12">
+    &#160;&#160;causing ~1.62ms of additional shader iteration overhead under identical lighting.
+  </text>
+
+  <!-- Footer Info -->
+  <text x="60" y="560" fill="#888888" font-family="'JetBrains Mono', monospace" font-size="11">Data collected via RenderDoc &amp; NVIDIA Nsight Graphics GPU Trace</text>
+</svg>

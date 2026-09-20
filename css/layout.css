@@ -1,0 +1,201 @@
+/* ============================================
+   DeltaTime — Layout
+   ============================================ */
+
+html {
+  scrollbar-gutter: stable;
+}
+   
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-xl);
+  padding-right: var(--space-xl);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+/* Section spacing */
+.section {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
+.section--sm {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.section--dark {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-invert);
+}
+
+.section--alt {
+  background-color: var(--color-bg-alt);
+}
+
+/* Grid layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+/* Flex utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+.gap-2xl { gap: var(--space-2xl); }
+
+/* Dividers */
+.divider {
+  border: none;
+  border-top: var(--border-thin);
+  margin: var(--space-3xl) 0;
+}
+
+/* Accessibility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Native Dialog Gallery */
+dialog.gallery-modal,
+dialog.image-dialog {
+  margin: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: visible;
+  position: relative;
+}
+
+dialog.gallery-modal::backdrop,
+dialog.image-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.gallery-modal__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-modal__close,
+.dialog-close {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: var(--text-xl);
+  cursor: pointer;
+  padding: var(--space-xs);
+  line-height: 1;
+  transition: opacity var(--transition-fast);
+}
+
+.gallery-modal__close:hover,
+.dialog-close:hover {
+  opacity: 0.7;
+}
+
+.gallery-modal__close:focus-visible,
+.dialog-close:focus-visible {
+  outline: 2px solid var(--color-accent);
+}
+
+.gallery-modal__figure {
+  margin: 0;
+  background: var(--color-bg);
+  border: var(--border-thin);
+  padding: var(--space-xs);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-modal__img {
+  max-width: 85vw;
+  max-height: calc(85vh - 60px);
+  object-fit: contain;
+  display: block;
+}
+
+.gallery-modal__caption {
+  color: white;
+  text-align: center;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
+  font-size: var(--text-sm);
+  max-width: 80ch;
+}
+
+/* Make article images look clickable */
+.article-image {
+  cursor: zoom-in;
+}
+
+.article-image:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.article-image__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  background-color: var(--color-bg-alt);
+}
+

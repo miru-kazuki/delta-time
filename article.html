@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Godot 4.3 vs Unity 2024: Rendering Pipeline Deep Dive — DeltaTime</title>
+  <meta name="description" content="A comprehensive comparison of rendering architectures, shader compilation strategies, and real-world frame rate performance between Godot and Unity.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="40" height="40">
+      </a>
+
+      <div class="flex items-center gap-lg">
+        <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+            <a href="article.html" class="header__link">Latest Review</a>
+            <a href="benchmarks.html" class="header__link">Benchmarks</a>
+            <a href="tech-stack.html" class="header__link">Tech Stack</a>
+        </nav>
+        <button class="header__search" id="search-toggle" aria-label="Open search" type="button">
+          <img src="assets/searchIcon.svg" alt="" aria-hidden="true" width="18" height="18">
+        </button>
+        <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="search-modal" role="dialog" aria-label="Search" aria-hidden="true">
+    <div class="search-modal__inner">
+      <label for="search-input" class="visually-hidden">Search articles</label>
+      <input type="search" id="search-input" class="search-modal__input" placeholder="Search articles, benchmarks, reviews…" autocomplete="off">
+      <p class="search-modal__hint">Press <kbd>Esc</kbd> to close</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <article>
+      <!-- ========== ARTICLE HEADER ========== -->
+      <header class="section pb-0">
+        <div class="container container--narrow text-center" data-aos="fade-up">
+          <p class="eyebrow" style="margin-bottom: var(--space-md);">Performance Analysis</p>
+          <h1 class="heading-display" style="margin-bottom: var(--space-lg);">Godot 4.3 vs Unity 2024: Rendering Pipeline Deep Dive</h1>
+          <p class="body-large" style="margin-bottom: var(--space-xl);">A comprehensive comparison of rendering architectures, shader compilation strategies, and real-world frame rate performance across identical test scenes.</p>
+          
+          <div class="flex items-center justify-center gap-md" style="color: var(--color-text-light); font-size: var(--text-sm);">
+            <time datetime="2026-09-15">Sep 15, 2026</time>
+            <span style="width: 3px; height: 3px; border-radius: 50%; background-color: var(--color-text-light);" aria-hidden="true"></span>
+            <span>12 min read</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ========== HERO IMAGE ========== -->
+      <section class="section">
+        <div class="container">
+          <figure class="featured-review__image" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06" data-aos="fade-up" style="aspect-ratio: 21/9; margin-bottom: 0;">
+            <figcaption class="visually-hidden">Game engine editor showing a 3D scene with performance metrics overlay</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ========== ARTICLE CONTENT ========== -->
+      <div class="deep-dive" style="padding-top: 0;">
+        <div class="container container--narrow">
+          <div class="deep-dive__content">
+            <p>The performance gap between modern game engines is often misunderstood. While synthetic benchmarks can show raw throughput differences, real-world rendering scenarios reveal a more nuanced picture of how engines handle bottlenecks.</p>
+            
+            <p>In this analysis, we dive deep into the rendering architectures of Godot 4.3 and Unity 2024 to understand why certain scenes perform drastically differently across the two engines.</p>
+
+            <h3>The Test Environment</h3>
+            <p>To ensure a fair comparison, we constructed identical scenes in both engines featuring a 100,000 polygon environment with a mix of opaque and transparent materials, 50 dynamic point lights, and standard post-processing (bloom, SSAO, and anti-aliasing).</p>
+            
+            <ul style="list-style-type: disc; padding-left: var(--space-xl); margin-bottom: var(--space-lg);">
+              <li><strong>CPU:</strong> AMD Ryzen 7 7800X3D</li>
+              <li><strong>GPU:</strong> NVIDIA RTX 4070</li>
+              <li><strong>RAM:</strong> 32 GB DDR5-6000</li>
+              <li><strong>OS:</strong> Windows 11 23H2</li>
+            </ul>
+
+            <h3>Vulkan Forward+ vs Universal Render Pipeline</h3>
+            <p>Godot 4's Vulkan-based renderer introduces a forward+ (clustered forward) rendering pipeline. This approach drastically minimizes draw calls by dividing the screen into a frustum-aligned grid and assigning lights to these clusters. As a result, the engine handles scenes with many dynamic lights remarkably well without the need for complex deferred shading setups.</p>
+            
+            <p>Unity's Universal Render Pipeline (URP), configured in forward rendering mode, takes a more traditional approach but offers immense flexibility through scriptable render passes. While highly customizable, it can introduce additional CPU overhead when managing numerous passes, especially if not carefully optimized.</p>
+
+            <h3>Benchmark Results</h3>
+            <p>In our primary test scene, Godot maintained an average of 142 FPS, while Unity hovered around 128 FPS. However, the frame time consistency tells a different story. Unity exhibited tighter 99th percentile frame times, meaning fewer noticeable micro-stutters, whereas Godot occasionally spiked when new shader variants were compiled mid-frame.</p>
+
+            <div style="padding: var(--space-xl); border: var(--border-thin); background: var(--color-bg-alt); margin: var(--space-xl) 0;">
+              <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-xs);"><em>*Example Data</em></p>
+              <div class="flex items-center justify-between" style="margin-bottom: var(--space-sm);">
+                <strong>Godot Average:</strong> <span>142 FPS</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <strong>Unity Average:</strong> <span>128 FPS</span>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- ========== CODE COMPARISON ========== -->
+      <section class="code-comparison" data-aos="fade-up">
+        <div class="container">
+          <h2 class="code-comparison__title">Code Comparison: Rendering Setup</h2>
+          <p class="code-comparison__desc">A look at how a basic custom post-processing effect is set up in each engine.</p>
+
+          <div class="code-comparison__grid">
+            <!-- Godot -->
+            <div class="code-block">
+              <div class="code-block__header">
+                <span class="code-block__lang">GLSL / GDShader</span>
+                <span class="code-block__engine">Godot Engine</span>
+              </div>
+              <pre><code><span class="code-keyword">shader_type</span> canvas_item;
+
+<span class="code-keyword">uniform float</span> intensity : hint_range(0.0, 1.0) = 0.5;
+
+<span class="code-keyword">void</span> <span class="code-function">fragment</span>() {
+    <span class="code-type">vec4</span> col = texture(SCREEN_TEXTURE, SCREEN_UV);
+    
+    <span class="code-comment">// Simple grayscale conversion</span>
+    <span class="code-type">float</span> lum = dot(col.rgb, vec3(0.299, 0.587, 0.114));
+    
+    COLOR = mix(col, vec4(vec3(lum), col.a), intensity);
+}</code></pre>
+            </div>
+
+            <!-- Unity -->
+            <div class="code-block">
+              <div class="code-block__header">
+                <span class="code-block__lang">HLSL</span>
+                <span class="code-block__engine">Unity URP</span>
+              </div>
+              <pre><code><span class="code-keyword">Shader</span> <span class="code-string">"Hidden/Custom/Grayscale"</span>
+{
+    <span class="code-keyword">Properties</span>
+    {
+        _MainTex (<span class="code-string">"Texture"</span>, 2D) = <span class="code-string">"white"</span> {}
+        _Intensity (<span class="code-string">"Intensity"</span>, Range(0, 1)) = 0.5
+    }
+    <span class="code-keyword">SubShader</span>
+    {
+        <span class="code-comment">// Pass implementation...</span>
+        <span class="code-keyword">float4</span> <span class="code-function">frag</span> (v2f i) : SV_Target
+        {
+            <span class="code-keyword">float4</span> col = tex2D(_MainTex, i.uv);
+            <span class="code-keyword">float</span> lum = dot(col.rgb, float3(0.299, 0.587, 0.114));
+            <span class="code-keyword">return</span> lerp(col, float4(lum, lum, lum, col.a), _Intensity);
+        }
+    }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ========== ARTICLE IMAGES ========== -->
+      <section class="article-images" style="padding-top: var(--space-2xl);">
+        <div class="container">
+          <div class="article-images__grid">
+            <figure class="article-image" data-aos="fade-up" data-aos-delay="0" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06">
+              <img src="assets/benchmark-frametime.svg" alt="Frame time graph comparing Godot and Unity" class="article-image__img" width="600" height="450" loading="lazy">
+              <figcaption class="article-image__caption">Frame time analysis — 99th percentile comparison</figcaption>
+            </figure>
+  
+            <figure class="article-image" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06">
+              <img src="assets/benchmark-memory.svg" alt="Memory allocation timeline during scene transitions" class="article-image__img" width="600" height="450" loading="lazy">
+              <figcaption class="article-image__caption">Memory allocation timeline during scene transitions</figcaption>
+            </figure>
+  
+            <figure class="article-image" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="4" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.06">
+              <img src="assets/benchmark-gpu.svg" alt="GPU utilization heatmap across rendering passes" class="article-image__img" width="600" height="450" loading="lazy">
+              <figcaption class="article-image__caption">GPU utilization heatmap across rendering passes</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== CONCLUSION ========== -->
+      <div class="deep-dive" style="border-bottom: none;">
+        <div class="container container--narrow">
+          <div class="deep-dive__content">
+            <h3>Conclusion</h3>
+            <p>Both engines represent the state of the art in accessible real-time rendering, but they cater to slightly different philosophies. Godot's Forward+ renderer is incredibly capable out of the box for handling numerous dynamic lights, making it excellent for specific styles of games without deep dive optimization.</p>
+            <p>Unity's URP, conversely, provides a highly tunable foundation that, while perhaps requiring more initial setup to perfectly optimize for a specific scene, offers the granular control necessary to squeeze out every last drop of performance on constrained platforms.</p>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+  </main>
+
+  <!-- Image Gallery Modal -->
+  <dialog class="image-dialog gallery-modal" id="gallery-modal" aria-label="Image Preview">
+    <button class="dialog-close gallery-modal__close" id="gallery-close" type="button" aria-label="Close image">×</button>
+    <figure class="gallery-modal__figure">
+      <img class="gallery-modal__img" id="gallery-img" src="" alt="">
+      <figcaption class="gallery-modal__caption" id="gallery-caption"></figcaption>
+    </figure>
+  </dialog>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <a href="index.html" class="footer__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="28" height="28">
+      </a>
+      <p class="footer__copy">&copy; 2026 DeltaTime. Independent engine analysis.</p>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="reviews.html" class="footer__link">Reviews</a>
+        <a href="benchmarks.html" class="footer__link">Benchmarks</a>
+        <a href="tech-stack.html" class="footer__link">Tech Stack</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

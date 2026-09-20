@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Stack — DeltaTime</title>
+  <meta name="description" content="The technology stack behind the DeltaTime editorial dashboard.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="40" height="40">
+      </a>
+
+      <div class="flex items-center gap-lg">
+        <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+            <a href="article.html" class="header__link">Latest Review</a>
+            <a href="benchmarks.html" class="header__link">Benchmarks</a>
+            <a href="tech-stack.html" class="header__link">Tech Stack</a>
+        </nav>
+        <button class="header__search" id="search-toggle" aria-label="Open search" type="button">
+          <img src="assets/searchIcon.svg" alt="" aria-hidden="true" width="18" height="18">
+        </button>
+        <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="search-modal" role="dialog" aria-label="Search" aria-hidden="true">
+    <div class="search-modal__inner">
+      <label for="search-input" class="visually-hidden">Search articles</label>
+      <input type="search" id="search-input" class="search-modal__input" placeholder="Search articles, benchmarks, reviews…" autocomplete="off">
+      <p class="search-modal__hint">Press <kbd>Esc</kbd> to close</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ========== PAGE HEADER ========== -->
+    <section class="section">
+      <div class="container">
+        <h1 class="heading-display">Tech Stack</h1>
+        <p class="body-large" style="max-width: 600px; margin-top: var(--space-md);">DeltaTime is built with a commitment to simplicity, performance, and accessibility without relying on heavy frameworks.</p>
+      </div>
+    </section>
+
+    <!-- ========== TECH STACK ========== -->
+    <section class="tech-stack" id="tech-stack" aria-labelledby="tech-stack-title" style="border-top: var(--border-thin);">
+      <div class="container">
+        <div class="tech-stack__grid">
+          
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="0">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 6L7.5 26L16 28.5L24.5 26L27 6H5Z" stroke="#E34F26" stroke-width="1.5" fill="none"/>
+                <path d="M16 8V26.5" stroke="#E34F26" stroke-width="1"/>
+                <path d="M10 10H22L21.5 16H11.5L12 20H21L20.5 24L16 25.5L11.5 24L11.2 21" stroke="#E34F26" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">HTML5</p>
+            <p class="tech-stack__role">Semantic Structure</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="50">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 6L7.5 26L16 28.5L24.5 26L27 6H5Z" stroke="#1572B6" stroke-width="1.5" fill="none"/>
+                <path d="M16 8V26.5" stroke="#1572B6" stroke-width="1"/>
+                <path d="M10 10H22L21.5 14H12L12.5 18H21L20.5 24L16 25.5L11.5 24L11.2 21" stroke="#1572B6" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">CSS3</p>
+            <p class="tech-stack__role">Modular Styling</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="100">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="6" width="20" height="20" rx="2" stroke="#F7DF1E" stroke-width="1.5" fill="none"/>
+                <text x="16" y="22" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#1a1a1a">JS</text>
+              </svg>
+            </div>
+            <p class="tech-stack__name">JavaScript</p>
+            <p class="tech-stack__role">Vanilla Logic</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="150">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="10" stroke="#68A063" stroke-width="1.5" fill="none"/>
+                <path d="M12 20L16 12L20 20" stroke="#68A063" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">AOS</p>
+            <p class="tech-stack__role">Scroll Animations</p>
+          </div>
+
+          <div class="tech-stack__item" data-aos="fade-up" data-aos-delay="200">
+            <div class="tech-stack__icon" aria-hidden="true">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="8" width="20" height="16" rx="1" stroke="#6366F1" stroke-width="1.5" fill="none" transform="rotate(-3 16 16)"/>
+                <rect x="8" y="10" width="16" height="12" rx="1" stroke="#6366F1" stroke-width="1" fill="none" transform="rotate(2 16 16)"/>
+              </svg>
+            </div>
+            <p class="tech-stack__name">Tilt.js</p>
+            <p class="tech-stack__role">Hover Effects</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="deep-dive" style="border-bottom: none;">
+      <div class="container container--narrow">
+        <div class="deep-dive__content">
+          <h3>Why this stack?</h3>
+          <p>By relying exclusively on native browser capabilities and a couple of lightweight interaction libraries, DeltaTime maintains extremely fast load times and minimal rendering overhead. This approach ensures the focus remains on the editorial content and the benchmark data itself, rather than complex front-end architecture.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Gallery Modal -->
+  <dialog class="gallery-modal" id="gallery-modal" aria-label="Image Preview">
+    <div class="gallery-modal__inner">
+      <button class="gallery-modal__close" id="gallery-close" aria-label="Close preview">×</button>
+      <figure class="gallery-modal__figure">
+        <img class="gallery-modal__img" id="gallery-img" src="" alt="">
+        <figcaption class="gallery-modal__caption" id="gallery-caption"></figcaption>
+      </figure>
+    </div>
+  </dialog>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <a href="index.html" class="footer__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="28" height="28">
+      </a>
+      <p class="footer__copy">&copy; 2026 DeltaTime. Independent engine analysis.</p>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="reviews.html" class="footer__link">Reviews</a>
+        <a href="benchmarks.html" class="footer__link">Benchmarks</a>
+        <a href="tech-stack.html" class="footer__link">Tech Stack</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmarks — DeltaTime</title>
+  <meta name="description" content="Detailed performance benchmarks comparing Godot Engine and Unity.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="40" height="40">
+      </a>
+
+      <div class="flex items-center gap-lg">
+        <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+            <a href="article.html" class="header__link">Latest Review</a>
+            <a href="benchmarks.html" class="header__link">Benchmarks</a>
+            <a href="tech-stack.html" class="header__link">Tech Stack</a>
+        </nav>
+        <button class="header__search" id="search-toggle" aria-label="Open search" type="button">
+          <img src="assets/searchIcon.svg" alt="" aria-hidden="true" width="18" height="18">
+        </button>
+        <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="search-modal" role="dialog" aria-label="Search" aria-hidden="true">
+    <div class="search-modal__inner">
+      <label for="search-input" class="visually-hidden">Search articles</label>
+      <input type="search" id="search-input" class="search-modal__input" placeholder="Search articles, benchmarks, reviews…" autocomplete="off">
+      <p class="search-modal__hint">Press <kbd>Esc</kbd> to close</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ========== PAGE HEADER ========== -->
+    <section class="section">
+      <div class="container">
+        <h1 class="heading-display">Data & Benchmarks</h1>
+        <p class="body-large" style="max-width: 600px; margin-top: var(--space-md);">Raw performance data, memory profiles, and build sizes collected under controlled testing environments.</p>
+      </div>
+    </section>
+
+    <!-- ========== BENCHMARK SPOTLIGHT ========== -->
+    <section class="benchmark" id="benchmark" aria-labelledby="benchmark-title" data-aos="fade-up">
+      <div class="container">
+        <div class="benchmark__header">
+          <h2 class="benchmark__title" id="benchmark-title">Average FPS Comparison</h2>
+          <p class="benchmark__desc body-large">Higher is better. Tested across identical 3D Sponza scenes.</p>
+        </div>
+
+        <div class="benchmark__bars" id="benchmark-bars">
+          <!-- Godot FPS -->
+          <div class="benchmark-bar benchmark-bar--godot">
+            <div class="benchmark-bar__label">
+              <span class="benchmark-bar__engine">Godot Engine</span>
+              <span class="benchmark-bar__value" id="godot-fps-value">0<span>fps</span></span>
+            </div>
+            <progress id="godot-fps-bar" max="160" value="0" aria-label="Godot average FPS: 142">142</progress>
+          </div>
+
+          <!-- Unity FPS -->
+          <div class="benchmark-bar benchmark-bar--unity">
+            <div class="benchmark-bar__label">
+              <span class="benchmark-bar__engine">Unity</span>
+              <span class="benchmark-bar__value" id="unity-fps-value">0<span>fps</span></span>
+            </div>
+            <progress id="unity-fps-bar" max="160" value="0" aria-label="Unity average FPS: 128">128</progress>
+          </div>
+        </div>
+        
+        <div class="benchmark__env" style="margin-bottom: 0;">
+          <p class="benchmark__env-title">Test Environment & Methodology</p>
+          <div class="benchmark__env-list" style="margin-bottom: var(--space-md);">
+            <p class="benchmark__env-item"><strong>CPU:</strong> AMD Ryzen 7 7800X3D</p>
+            <p class="benchmark__env-item"><strong>GPU:</strong> NVIDIA RTX 4070</p>
+            <p class="benchmark__env-item"><strong>RAM:</strong> 32 GB DDR5-6000</p>
+            <p class="benchmark__env-item"><strong>OS:</strong> Windows 11 23H2</p>
+            <p class="benchmark__env-item"><strong>Scene:</strong> 3D Sponza, 100k tris</p>
+            <p class="benchmark__env-item"><strong>Resolution:</strong> 1920×1080</p>
+          </div>
+          <p class="benchmark__disclaimer" style="margin-top: 0; opacity: 0.8;">* The data presented here is for demonstration purposes. These numbers are not from a verified, peer-reviewed benchmark methodology.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ENGINE COMPARISON ========== -->
+    <section class="comparison" id="comparison" aria-labelledby="comparison-title" data-aos="fade-up">
+      <div class="container">
+        <div class="comparison__header">
+          <h2 class="comparison__title" id="comparison-title">Detailed Metrics</h2>
+          <div class="comparison__tabs" role="tablist" aria-label="Select engine to compare">
+            <button class="comparison__tab is-active" role="tab" aria-selected="true" aria-controls="comparison-panel" id="tab-godot" data-engine="godot" type="button">Godot</button>
+            <button class="comparison__tab" role="tab" aria-selected="false" aria-controls="comparison-panel" id="tab-unity" data-engine="unity" type="button">Unity</button>
+          </div>
+        </div>
+
+        <div class="comparison__grid" id="comparison-panel" role="tabpanel" aria-labelledby="tab-godot" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.04">
+          <div class="comparison__card">
+            <p class="comparison__card-label">Performance</p>
+            <p class="comparison__card-value" id="comp-fps">142</p>
+            <p class="comparison__card-unit">avg fps</p>
+            <p class="comparison__card-diff is-positive" id="comp-fps-diff">+10.9% vs Unity</p>
+          </div>
+          <div class="comparison__card">
+            <p class="comparison__card-label">Memory</p>
+            <p class="comparison__card-value" id="comp-mem">820</p>
+            <p class="comparison__card-unit">MB RAM</p>
+            <p class="comparison__card-diff is-positive" id="comp-mem-diff">−14.6% vs Unity</p>
+          </div>
+          <div class="comparison__card">
+            <p class="comparison__card-label">Loading Time</p>
+            <p class="comparison__card-value" id="comp-load">4.2</p>
+            <p class="comparison__card-unit">seconds</p>
+            <p class="comparison__card-diff is-positive" id="comp-load-diff">−17.6% vs Unity</p>
+          </div>
+          <div class="comparison__card">
+            <p class="comparison__card-label">Build Size</p>
+            <p class="comparison__card-value" id="comp-build">42</p>
+            <p class="comparison__card-unit">MB</p>
+            <p class="comparison__card-diff is-positive" id="comp-build-diff">−51.2% vs Unity</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Gallery Modal -->
+  <dialog class="image-dialog gallery-modal" id="gallery-modal" aria-label="Image Preview">
+    <button class="dialog-close gallery-modal__close" id="gallery-close" type="button" aria-label="Close image">×</button>
+    <figure class="gallery-modal__figure">
+      <img class="gallery-modal__img" id="gallery-img" src="" alt="">
+      <figcaption class="gallery-modal__caption" id="gallery-caption"></figcaption>
+    </figure>
+  </dialog>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <a href="index.html" class="footer__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="28" height="28">
+      </a>
+      <p class="footer__copy">&copy; 2026 DeltaTime. Independent engine analysis.</p>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="reviews.html" class="footer__link">Reviews</a>
+        <a href="benchmarks.html" class="footer__link">Benchmarks</a>
+        <a href="tech-stack.html" class="footer__link">Tech Stack</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/benchmark.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews — DeltaTime</title>
+  <meta name="description" content="Editorial reviews and performance analyses of Godot Engine and Unity.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Skip link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="40" height="40">
+      </a>
+
+      <div class="flex items-center gap-lg">
+        <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+            <a href="article.html" class="header__link">Latest Review</a>
+            <a href="benchmarks.html" class="header__link">Benchmarks</a>
+            <a href="tech-stack.html" class="header__link">Tech Stack</a>
+        </nav>
+        <button class="header__search" id="search-toggle" aria-label="Open search" type="button">
+          <img src="assets/searchIcon.svg" alt="" aria-hidden="true" width="18" height="18">
+        </button>
+        <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="search-modal" role="dialog" aria-label="Search" aria-hidden="true">
+    <div class="search-modal__inner">
+      <label for="search-input" class="visually-hidden">Search articles</label>
+      <input type="search" id="search-input" class="search-modal__input" placeholder="Search articles, benchmarks, reviews…" autocomplete="off">
+      <p class="search-modal__hint">Press <kbd>Esc</kbd> to close</p>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ========== PAGE HEADER ========== -->
+    <section class="section">
+      <div class="container">
+        <h1 class="heading-display">Reviews</h1>
+        <p class="body-large" style="max-width: 600px; margin-top: var(--space-md);">Deep dives, performance analyses, and technical breakdowns comparing Godot and Unity.</p>
+      </div>
+    </section>
+
+    <!-- ========== REVIEWS LISTING ========== -->
+    <section class="reviews-section" aria-labelledby="reviews-list-title" style="padding-top: 0;">
+      <div class="container">
+        <h2 id="reviews-list-title" class="visually-hidden">All Reviews</h2>
+        
+        <div class="grid-3">
+          <!-- Review 1 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="0">
+            <a href="article.html" style="display: block; height: 100%;">
+              <figure class="review-card__image">
+                <div class="review-card__image-inner" style="background: linear-gradient(135deg, #e8e8e8 0%, #c0c0c0 100%);" role="img" aria-label="Rendering pipeline visualization"></div>
+              </figure>
+              <div class="review-card__body">
+                <p class="eyebrow review-card__category">Performance Analysis</p>
+                <h3 class="review-card__title">Godot 4.3 vs Unity 2024: Rendering Pipeline Deep Dive</h3>
+                <p class="review-card__desc">A comprehensive comparison of rendering architectures, shader compilation strategies, and real-world frame rate performance.</p>
+                <div class="review-card__meta">
+                  <time datetime="2026-09-15">Sep 15, 2026</time>
+                  <span class="review-card__meta-divider" aria-hidden="true"></span>
+                  <span>12 min read</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- Review 2 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="100">
+            <a href="article.html" style="display: block; height: 100%;">
+              <figure class="review-card__image">
+                <div class="review-card__image-inner" role="img" aria-label="Physics engine stress test visualization"></div>
+              </figure>
+              <div class="review-card__body">
+                <p class="eyebrow review-card__category">Benchmark</p>
+                <h3 class="review-card__title">Physics Engine Stress Test: 10,000 Rigid Bodies</h3>
+                <p class="review-card__desc">How Godot's Jolt integration and Unity's PhysX handle extreme physics workloads with frame time analysis.</p>
+                <div class="review-card__meta">
+                  <time datetime="2026-09-10">Sep 10, 2026</time>
+                  <span class="review-card__meta-divider" aria-hidden="true"></span>
+                  <span>8 min read</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- Review 3 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="200">
+            <a href="article.html" style="display: block; height: 100%;">
+              <figure class="review-card__image">
+                <div class="review-card__image-inner" style="background: linear-gradient(135deg, #dde4ee 0%, #c8d0dc 100%);" role="img" aria-label="Memory profiling session screenshot"></div>
+              </figure>
+              <div class="review-card__body">
+                <p class="eyebrow review-card__category">Analysis</p>
+                <h3 class="review-card__title">Memory Profiling: GDScript vs C# Allocations</h3>
+                <p class="review-card__desc">Tracking garbage collection patterns and heap allocation efficiency across both scripting environments.</p>
+                <div class="review-card__meta">
+                  <time datetime="2026-09-05">Sep 5, 2026</time>
+                  <span class="review-card__meta-divider" aria-hidden="true"></span>
+                  <span>10 min read</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <!-- Review 4 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="0">
+            <a href="article.html" style="display: block; height: 100%;">
+              <figure class="review-card__image">
+                <div class="review-card__image-inner" style="background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);" role="img" aria-label="Build pipeline comparison chart"></div>
+              </figure>
+              <div class="review-card__body">
+                <p class="eyebrow review-card__category">Tooling</p>
+                <h3 class="review-card__title">Build Pipeline: Export Times and Output Optimization</h3>
+                <p class="review-card__desc">Comparing build times, output binary sizes, and optimization options for desktop and mobile targets.</p>
+                <div class="review-card__meta">
+                  <time datetime="2026-08-28">Aug 28, 2026</time>
+                  <span class="review-card__meta-divider" aria-hidden="true"></span>
+                  <span>7 min read</span>
+                </div>
+              </div>
+            </a>
+          </article>
+          
+          <!-- Review 5 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="100">
+            <a href="article.html" style="display: block; height: 100%;">
+              <figure class="review-card__image">
+                <div class="review-card__image-inner" style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);" role="img" aria-label="Asset pipeline"></div>
+              </figure>
+              <div class="review-card__body">
+                <p class="eyebrow review-card__category">Workflow</p>
+                <h3 class="review-card__title">Asset Import Times: Large Scale Projects</h3>
+                <p class="review-card__desc">How both engines handle importing hundreds of gigabytes of raw assets, textures, and models.</p>
+                <div class="review-card__meta">
+                  <time datetime="2026-08-15">Aug 15, 2026</time>
+                  <span class="review-card__meta-divider" aria-hidden="true"></span>
+                  <span>9 min read</span>
+                </div>
+              </div>
+            </a>
+          </article>
+          
+          <!-- Review 6 -->
+          <article class="review-card" data-aos="fade-up" data-aos-delay="200">
+            <a href="article.html" style="display: block; height: 100%;">
+              <figure class="review-card__image">
+                <div class="review-card__image-inner" style="background: linear-gradient(135deg, #d4d4d4 0%, #a3a3a3 100%);" role="img" aria-label="Mobile performance"></div>
+              </figure>
+              <div class="review-card__body">
+                <p class="eyebrow review-card__category">Mobile</p>
+                <h3 class="review-card__title">Battery Drain on Mobile Targets</h3>
+                <p class="review-card__desc">Analyzing thermal throttling and battery consumption on iOS and Android devices.</p>
+                <div class="review-card__meta">
+                  <time datetime="2026-08-01">Aug 1, 2026</time>
+                  <span class="review-card__meta-divider" aria-hidden="true"></span>
+                  <span>6 min read</span>
+                </div>
+              </div>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Image Gallery Modal -->
+  <dialog class="gallery-modal" id="gallery-modal" aria-label="Image Preview">
+    <div class="gallery-modal__inner">
+      <button class="gallery-modal__close" id="gallery-close" aria-label="Close preview">×</button>
+      <figure class="gallery-modal__figure">
+        <img class="gallery-modal__img" id="gallery-img" src="" alt="">
+        <figcaption class="gallery-modal__caption" id="gallery-caption"></figcaption>
+      </figure>
+    </div>
+  </dialog>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <a href="index.html" class="footer__logo" aria-label="DeltaTime home">
+        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="28" height="28">
+      </a>
+      <p class="footer__copy">&copy; 2026 DeltaTime. Independent engine analysis.</p>
+      <nav class="footer__links" aria-label="Footer navigation">
+        <a href="reviews.html" class="footer__link">Reviews</a>
+        <a href="benchmarks.html" class="footer__link">Benchmarks</a>
+        <a href="tech-stack.html" class="footer__link">Tech Stack</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/animation.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+/* ============================================
+   DeltaTime — Responsive
+   ============================================ */
+
+/* Tablet: <= 1024px */
+@media (max-width: 1024px) {
+  :root {
+    --text-5xl: 2.25rem;
+    --text-4xl: 1.875rem;
+    --text-3xl: 1.5rem;
+  }
+
+  .hero__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .comparison__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-stack__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .benchmark__bars {
+    grid-template-columns: 1fr;
+  }
+
+  .code-comparison__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .article-images__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: <= 768px */
+@media (max-width: 768px) {
+  :root {
+    --text-5xl: 1.875rem;
+    --text-4xl: 1.5rem;
+    --text-3xl: 1.25rem;
+    --space-4xl: 4rem;
+    --space-5xl: 5rem;
+  }
+
+  .container {
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+  }
+
+  /* Header mobile */
+  .header__nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: var(--space-xl);
+    background-color: var(--color-bg);
+    border-top: var(--border-thin);
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+  }
+
+  .header__nav.is-open {
+    transform: translateX(0);
+  }
+
+  .header__nav .header__link {
+    display: block;
+    width: 100%;
+    padding: var(--space-lg) 0;
+    font-size: var(--text-lg);
+    border-bottom: var(--border-thin);
+  }
+
+  .header__menu-toggle {
+    display: flex;
+  }
+
+  /* Hero */
+  .hero {
+    padding-top: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+  }
+
+  .hero__cards {
+    grid-template-columns: 1fr;
+  }
+
+  /* Featured review */
+  .featured-review__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  /* Reviews */
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Comparison */
+  .comparison__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Article images */
+  .article-images__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tech stack */
+  .tech-stack__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Footer */
+  .footer__inner {
+    flex-direction: column;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .footer__links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Small mobile: <= 480px */
+@media (max-width: 480px) {
+  :root {
+    --text-5xl: 1.5rem;
+    --space-4xl: 3rem;
+    --space-3xl: 2rem;
+  }
+
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .engine-card {
+    padding: var(--space-lg);
+  }
+
+  .comparison__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison__tabs {
+    width: 100%;
+  }
+
+  .comparison__tab {
+    flex: 1;
+    text-align: center;
+    padding: var(--space-md) var(--space-sm);
+    font-size: var(--text-xs);
+  }
+
+  .tech-stack__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
