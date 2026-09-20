@@ -31,29 +31,32 @@
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- ========== HEADER ========== -->
-  <header class="header" role="banner">
-    <div class="container header__inner">
-      <a href="index.html" class="header__logo" aria-label="DeltaTime home">
-        <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="40" height="40">
-      </a>
+  <!-- ========== HEADER ========== -->
+<header class="header" role="banner">
+  <div class="container header__inner">
+    <a href="index.html" class="header__logo" aria-label="DeltaTime home">
+      <img src="assets/deltaTimeLogo.svg" alt="DeltaTime logo" width="40" height="40">
+    </a>
 
-      <div class="flex items-center gap-lg">
-        <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="header__actions">
+      <nav class="header__nav" id="main-nav" role="navigation" aria-label="Main navigation">
         <a href="#featured-review" class="header__link">Latest Review</a>
         <a href="#benchmark" class="header__link">Benchmarks</a>
         <a href="#tech-stack" class="header__link">Tech Stack</a>
       </nav>
-        <button class="header__search" id="search-toggle" aria-label="Open search" type="button">
-          <img src="assets/searchIcon.svg" alt="" aria-hidden="true" width="18" height="18">
-        </button>
-        <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+
+      <button class="header__search" id="search-toggle" aria-label="Open search" type="button">
+        <img src="assets/searchbaru.svg" alt="" aria-hidden="true" width="18" height="18">
+      </button>
+
+      <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-  </header>
+  </div>
+</header>
 
   <!-- Search Modal -->
   <div class="search-modal" id="search-modal" role="dialog" aria-label="Search" aria-hidden="true">
@@ -74,7 +77,9 @@
           <!-- Left side hero content -->
           <div class="hero__content">
             <p class="eyebrow hero__eyebrow">Game Engine / Performance</p>
-            <h1 class="heading-display hero__title" id="hero-title">Measure the engine.<br>Understand the game.</h1>
+            <h1 class="heading-display hero__title" id="hero-title">
+              <span id="typewriter-text"></span><span class="typewriter-cursor" aria-hidden="true"></span>
+            </h1>
             <p class="body-large hero__description">Independent performance analysis of Godot Engine and Unity — frame rates, memory, load times, and build sizes compared side by side.</p>
             <a href="#benchmark" class="cta">Explore Benchmarks <span aria-hidden="true">→</span></a>
           </div>
@@ -543,6 +548,7 @@
   <script src="js/benchmark.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/animation.js"></script>
+  <script src="js/typewriter.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

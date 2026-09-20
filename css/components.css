@@ -62,12 +62,28 @@
   width: 100%;
 }
 
-.header__search {
+.header__actions {
   display: flex;
+  align-items: center;
+  gap: var(--space-xl); /* Sesuaikan gap agar presisi dengan tombol & nav */
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.header__search {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
   transition: opacity var(--transition-fast);
 }
 
@@ -76,8 +92,9 @@
 }
 
 .header__search img {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
+  display: block;
 }
 
 /* Mobile menu toggle */
@@ -1044,4 +1061,29 @@ input:focus-visible {
 
 .skip-link:focus {
   top: var(--space-md);
+}
+
+/* Typewriter Cursor Styling */
+.hero__title {
+  min-height: 2.2em; /* Mencegah layout meloncat saat teks belum terketik */
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background-color: var(--color-text, #000000);
+  margin-left: 4px;
+  vertical-align: -0.05em;
+  animation: blink 0.75s step-end infinite;
+}
+
+/* Animasi Kedip Garis Kursor */
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
